@@ -1,19 +1,25 @@
-from data.scripts.workTime import giveTime
 from data.scripts.bridgeCSVBOOK import constructor
 
 class TaskBook:
     def __init__(self, data_import):
         self.fieldnames = ['Date', 'Task']
         self.data = data_import if data_import else []
-        self.menu = f'''----- Menu -----
+
+        self.version = 'b.0.2'
+
+        self.menu = f'''----------------
+Task Manager {self.version}
+----- Menu -----
 1. Add Task
-2. Delete Task
-3. Show Tasks
-4. Exit
+2. Change Task
+3. Delete Task
+4. Show Tasks
+5. Save Tasks
+6. Exit
 ----------------'''
 
     def addTask(self, task):
-        self.data.append(constructor(giveTime(), task))
+        self.data.append(constructor(task=task))
 
     def delTask(self, num):
         adress =  int(num) - 1
@@ -27,7 +33,7 @@ class TaskBook:
         else:
             print('U have this tasks:')
             for ind, task in enumerate(self.data):
-                print(f'{ind+1}. {task['Task']} (Created: {task['Date']})')
+                print(f'{ind+1}. {task['Task']} ({task['Status']}: {task['Date']})')
 
         print('----------------')
 
@@ -37,3 +43,6 @@ class TaskBook:
     def importData(self, data_import):
         self.data = data_import
 
+    def changeTask(self, num, new_task):
+        adress = int(num) - 1
+        self.data[adress] = constructor(new_task, status='Updated')

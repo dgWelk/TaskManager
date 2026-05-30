@@ -1,19 +1,10 @@
 from data.scripts.workTime import giveTime
 
-
-def constructor(date, data):
+def constructor(task, date=None, status='Created'):
+    if date is None:
+        date = giveTime()
     return {
         'Date': date,
-        'Task': data
+        'Task': task,
+        'Status': status
     }
-
-def CSVBOOK(data):
-    result = []
-
-    date = giveTime()
-
-    for piece in data:
-        result.append(constructor(date, piece))
-
-
-CSVBOOK('asd')

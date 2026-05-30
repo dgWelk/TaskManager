@@ -10,13 +10,13 @@ class workCSV:
 
         with open(self.adress, 'r', encoding='utf-8') as csvfile:
             for row in csv.DictReader(csvfile):
-                data.append(constructor(row['Date'], row['Task']))
+                data.append(constructor(date=row['Date'], task=row['Task'], status=row['Status']))
         return data
 
 
     def writeCSV(self, data):
         with open(self.adress, 'w', newline='', encoding='utf-8') as csvfile:
-            fieldnames = ['Date', 'Task']
+            fieldnames = ['Date', 'Task', 'Status']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
             writer.writerows(data)
