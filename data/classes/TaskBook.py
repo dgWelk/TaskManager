@@ -5,7 +5,7 @@ class TaskBook:
         self.fieldnames = ['Date', 'Task']
         self.data = data_import if data_import else []
 
-        self.version = 'b.0.2'
+        self.version = 'b.0.3'
 
         self.menu = f'''----------------
 Task Manager {self.version}
