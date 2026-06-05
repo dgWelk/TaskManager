@@ -2,20 +2,34 @@ from data.scripts.bridgeCSVBOOK import constructor
 
 class TaskBook:
     def __init__(self, data_import):
-        self.fieldnames = ['Date', 'Task']
         self.data = data_import if data_import else []
 
-        self.version = 'b.0.3'
+        self.version = 'b.0.4'
 
-        self.menu = f'''----------------
-Task Manager {self.version}
+        self.helmet = f'''----------------
+Task Manager {self.version}'''
+
+#-----------------------------------------------------------------------------------------------------------------------
+        self.mainMenu = f'''{self.helmet}
 ----- Menu -----
 1. Add Task
 2. Change Task
 3. Delete Task
 4. Show Tasks
 5. Save Tasks
-6. Exit
+----------------
+6. Settings
+----------------
+0. Exit
+----------------'''
+
+        self.settingsMenu = f'''{self.helmet}
+--- Settings ---
+1. Change time format
+----------------
+9. Go back
+----------------
+0. Exit
 ----------------'''
 
     def addTask(self, task):
