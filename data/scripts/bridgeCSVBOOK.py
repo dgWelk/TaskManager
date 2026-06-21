@@ -1,8 +1,10 @@
-from data.scripts.workTime import giveTime
+from data.classes.FormatDate import formatDate
+
+operatorTime = formatDate
 
 def constructor(task, date=None, status='Created'):
     if date is None:
-        date = giveTime()
+        date = operatorTime().giveTime()
     return {
         'Date': date,
         'Task': task,

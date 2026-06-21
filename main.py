@@ -1,9 +1,13 @@
+from itertools import dropwhile
+
 from data.classes.TaskBook import TaskBook
 from data.classes.workCSV import workCSV
 from data.scripts.clearConsole import clearConsole
+from data.classes.workJson import workJson
 
-operator = workCSV()
-app = TaskBook(operator.readCSV())
+operatorCSV = workCSV()
+operatorJson = workJson()
+app = TaskBook(operatorCSV.readCSV(), operatorJson.readJson())
 
 def appWork():
     menu = 'main'
@@ -37,7 +41,7 @@ def appWork():
             elif choice == '5':
                 #Save
                 clearConsole()
-                operator.writeCSV(app.dropData())
+                operatorCSV.writeCSV(app.dropData())
                 print('Process of saved data is done.')
             elif choice == '6':
                 #Settings Menu
@@ -46,7 +50,7 @@ def appWork():
             elif choice == '0':
                 #Exit
                 clearConsole()
-                operator.writeCSV(app.dropData())
+                operatorCSV.writeCSV(app.dropData())
                 break
             else:
                 #Retry
@@ -60,6 +64,7 @@ def appWork():
 
             if choice == '1':
                 #Change time format
+                menu = 'settingsTime'
                 clearConsole()
             elif choice == '9':
                 #Go to main menu
@@ -68,10 +73,68 @@ def appWork():
             elif choice == '0':
                 #Exit
                 clearConsole()
-                operator.writeCSV(app.dropData())
+                operatorCSV.writeCSV(app.dropData())
                 break
             else:
                 #Retry
+                clearConsole()
+                print('Error of input data. Try again.')
+
+        elif menu == 'settingsTime':
+            print(app.settingsTimeMenu)
+
+            choice = input('chose the way >>> ')
+
+            if choice == '1':
+                #Change day format
+                work = input('(On/Off)\nInput work >>> ')
+                operatorJson.changeSettingsTime('dayFormat', work)
+                clearConsole()
+            elif choice == '2':
+                # Change month format
+                work = input('(On/Off)\nInput work >>> ')
+                if work == 'Off':
+                    type = input('(name/number)\nInput type >>> ')
+                    operatorJson.changeSettingsTime('yearFormat', work, type)
+                operatorJson.changeSettingsTime('yearFormat', work)
+                clearConsole()
+            elif choice == '3':
+                # Change year format
+                work = input('(On/Off)\nInput work >>> ')
+                if work == 'Off':
+                    type = input('(half/all)\nInput type >>> ')
+                    operatorJson.changeSettingsTime('yearFormat', work, type)
+                operatorJson.changeSettingsTime('yearFormat', work)
+                clearConsole()
+            elif choice == '4':
+                # Change hour format
+                work = input('(On/Off)\nInput work >>> ')
+                if work == 'Off':
+                    type = input('(AM/PM)\nInput type >>> ')
+                    operatorJson.changeSettingsTime('yearFormat', work, type)
+                operatorJson.changeSettingsTime('yearFormat', work)
+                clearConsole()
+            elif choice == '5':
+                # Change minute format
+                work = input('(On/Off)\nInput work >>> ')
+                operatorJson.changeSettingsTime('monthFormat', work)
+                clearConsole()
+            elif choice == '6':
+                # Change second format
+                work = input('(On/Off)\nInput work >>> ')
+                operatorJson.changeSettingsTime('monthFormat', work)
+                clearConsole()
+            elif choice == '9':
+                # Go to settings menu
+                clearConsole()
+                menu = 'settings'
+            elif choice == '0':
+                # Exit
+                clearConsole()
+                operatorCSV.writeCSV(app.dropData())
+                break
+            else:
+                # Retry
                 clearConsole()
                 print('Error of input data. Try again.')
 
@@ -80,5 +143,3 @@ def main():
     appWork()
 
 main()
-
-

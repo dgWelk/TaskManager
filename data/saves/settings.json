@@ -1,0 +1,33 @@
+{
+    "time": {
+        "dayFormat": {
+            "be": "On",
+            "type": "None"
+        },
+        "monthFormat": {
+            "be": "On",
+            "type": "number"
+        },
+        "yearFormat": {
+            "be": "On",
+            "type": "all"
+        },
+        "hourFormat": {
+            "be": "On",
+            "type": "PM"
+        },
+        "minuteFormat": {
+            "be": "On",
+            "type": "None"
+        },
+        "secondFormat": {
+            "be": "Off",
+            "type": "None"
+        }
+    },
+    "autoSave": {
+        "be": "On",
+        "time": "600"
+    },
+    "localization": "English"
+}

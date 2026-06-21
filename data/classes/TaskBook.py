@@ -1,10 +1,15 @@
 from data.scripts.bridgeCSVBOOK import constructor
+from data.classes.FormatDate import formatDate
+
+operatorTime = formatDate()
 
 class TaskBook:
-    def __init__(self, data_import):
+    def __init__(self, data_import, settings):
         self.data = data_import if data_import else []
+        self.settings = settings
 
-        self.version = 'b.0.4'
+
+        self.version = 'b.0.5'
 
         self.helmet = f'''----------------
 Task Manager {self.version}'''
@@ -32,6 +37,20 @@ Task Manager {self.version}'''
 0. Exit
 ----------------'''
 
+        self.settingsTimeMenu = f'''{self.helmet}
+- Settings Time -
+1. Change day format
+2. Change month format
+3. Change year format
+4. Change hour format
+5. Change minute format
+6. Change seconds format
+----------------
+9. Go back
+----------------
+0. Exit
+----------------'''
+
     def addTask(self, task):
         self.data.append(constructor(task=task))
 
@@ -47,7 +66,7 @@ Task Manager {self.version}'''
         else:
             print('U have this tasks:')
             for ind, task in enumerate(self.data):
-                print(f'{ind+1}. {task['Task']} ({task['Status']}: {task['Date']})')
+                print(f'{ind+1}. {task['Task']} ({task['Status']}: {operatorTime.showTime(task['Date'])})')
 
         print('----------------')
 
@@ -59,4 +78,4 @@ Task Manager {self.version}'''
 
     def changeTask(self, num, new_task):
         adress = int(num) - 1
-        self.data[adress] = constructor(new_task, status='Updated')
+        self.data[adress] = constructor(task=new_task, status='Updated')
